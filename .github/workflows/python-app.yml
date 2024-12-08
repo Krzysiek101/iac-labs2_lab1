@@ -39,6 +39,7 @@ jobs:
         key: ${{ runner.os }}-venv
   lint:
     concurrency: grupa1
+    needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -64,6 +65,7 @@ jobs:
 
   formatter:
     concurrency: grupa1
+    needs: lint
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -90,6 +92,7 @@ jobs:
 
   security:
     concurrency: grupa1
+    needs: formatter
     runs-on: ubuntu-latest
     defaults:
       run:
