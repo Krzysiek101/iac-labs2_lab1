@@ -14,11 +14,15 @@ permissions:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     concurrency: 
       group: grupa0
     runs-on: ubuntu-latest
     defaults:
       run:
+        shell: bash
         working-directory: ./example-app
 
     steps:
@@ -42,7 +46,7 @@ jobs:
     concurrency: 
       group: grupa1
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.version }}
     defaults:
       run:
         working-directory: ./example-app
@@ -69,7 +73,7 @@ jobs:
     concurrency: 
       group: grupa1
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.version }}
     defaults:
       run:
         working-directory: ./example-app
@@ -97,7 +101,7 @@ jobs:
     concurrency:
       group: grupa1
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.version }}
     defaults:
       run:
         working-directory: ./example-app
