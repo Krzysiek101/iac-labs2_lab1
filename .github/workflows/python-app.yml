@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.10
+    - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
         python-version: "3.11"
@@ -31,16 +31,21 @@ jobs:
       uses: snok/install-poetry@v1.3.4
     - name: install deps
       run: poetry install --no-root
-    - name: cached-poetry-dependencies
-      uses: action/cache@v3
-      with:
-        patch: /
-        key: ${{ runner.os }}-venv
           
  
-    - name: Lint with flake8
-      run: |
+    - name: Lint 
+      run: poetry run task lint
 
-    - name: Test with pytest
+    - name: pytest
       run: |
-        pytest
+        poetry run task test
+  
+
+    - name: formatter
+      run: |
+        poetry run task formatter
+
+    - name: security
+      run: |
+        poetry run task security
+      
