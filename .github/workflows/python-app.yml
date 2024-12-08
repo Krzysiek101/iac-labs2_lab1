@@ -68,7 +68,7 @@ jobs:
   formatter:
     concurrency: 
       group: grupa1
-    needs: lint
+    needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -96,7 +96,7 @@ jobs:
   security:
     concurrency:
       group: grupa1
-    needs: formatter
+    needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
