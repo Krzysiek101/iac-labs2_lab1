@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build:
-
+    concurrency: grupa0
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -38,7 +38,7 @@ jobs:
         path: /home/runner/work/iac-labs2_lab1/iac-labs2_lab1/example-app/.venv
         key: ${{ runner.os }}-venv
   lint:
-
+    concurrency: grupa1
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -61,22 +61,9 @@ jobs:
         key: ${{ runner.os }}-venv  
     - name: Lint 
       run: poetry run task lint
-      
-    - name: formatter
-      run: |
-        poetry run task formatter
-
-    - name: security
-      run: |
-        poetry run task security
-      
-    - name: pytest
-      run: |
-        poetry run task test
-
 
   formatter:
-
+    concurrency: grupa1
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -102,7 +89,7 @@ jobs:
         poetry run task formatter
 
   security:
-
+    concurrency: grupa1
     runs-on: ubuntu-latest
     defaults:
       run:
