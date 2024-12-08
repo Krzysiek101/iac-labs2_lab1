@@ -46,7 +46,7 @@ jobs:
     concurrency: 
       group: grupa1
     needs: build
-    runs-on: ${{ matrix.version }}
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./example-app
@@ -73,7 +73,7 @@ jobs:
     concurrency: 
       group: grupa1
     needs: build
-    runs-on: ${{ matrix.version }}
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./example-app
@@ -101,7 +101,7 @@ jobs:
     concurrency:
       group: grupa1
     needs: build
-    runs-on: ${{ matrix.version }}
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./example-app
