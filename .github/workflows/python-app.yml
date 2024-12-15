@@ -66,36 +66,12 @@ jobs:
     - name: Lint 
       run: |
         poetry run task lint
-  lint-windows:
-    concurrency: 
-      group: grupa1
-    needs: build
-    runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./example-app
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.11"
-    - name: Recover build venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: /home/runner/work/iac-labs2_lab1/iac-labs2_lab1/example-app/.venv
-        key: ${{ runner.os }}-venv  
-    - name: Lint 
-      run: |
-        poetry run task lint
 
   formatter:
     concurrency: 
       group: grupa1
     needs: build
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./example-app
@@ -115,37 +91,13 @@ jobs:
     - name: formatter
       run: |
         poetry run task formatter
-        
-  formatter-windows:
-    concurrency: 
-      group: grupa1
-    needs: build
-    runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./example-app
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.11"
-    - name: Recover build venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: /home/runner/work/iac-labs2_lab1/iac-labs2_lab1/example-app/.venv
-        key: ${{ runner.os }}-venv  
-    - name: formatter
-      run: |
-        poetry run task formatter
+      
 
   security:
     concurrency:
       group: grupa1
     needs: build
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./example-app
@@ -165,37 +117,13 @@ jobs:
     - name: security
       run: |
         poetry run task security
-        
-  security-windows:
-    concurrency:
-      group: grupa1
-    needs: build
-    runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./example-app
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.11"
-    - name: Recover build venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: /home/runner/work/iac-labs2_lab1/iac-labs2_lab1/example-app/.venv
-        key: ${{ runner.os }}-venv  
-    - name: security
-      run: |
-        poetry run task security
         
   unittest:
     concurrency:
       group: grupa2
     needs: [build, lint,formatter, security]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./example-app
